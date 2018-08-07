@@ -34,6 +34,11 @@ export CLICOLOR=1
 export TERM=xterm-256color
 export GOPATH="${HOME}/devspace/gopath"
 
+# git commands completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+   . $(brew --prefix)/etc/bash_completion
+fi
+
 # get git branch
 RED="\033[33;31m"
 GREEN="\033[33;32m"
