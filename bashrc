@@ -33,6 +33,7 @@ function self_proxy_off() {
 export CLICOLOR=1
 export TERM=xterm-256color
 export GOPATH="${HOME}/devspace/gopath"
+export GOBIN="${GOPATH}/bin"
 
 # git commands completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -55,3 +56,4 @@ parse_git_branch() {
 
 export PS1="\u@\h \[\033[01;36m\]\W\[\033[01;32m\] $(parse_git_branch)\[\033[00m\] \n\$ "
 
+export PATH="${PATH}:${GOBIN}"
