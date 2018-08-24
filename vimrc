@@ -1,4 +1,4 @@
-execute pathogen#infect()
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -12,9 +12,8 @@ filetype plugin indent on
 
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
-set autoindent
+syntax on 
 set smartindent
-set cindent
 
 set backup
 set backupdir=~/backup/vim
@@ -33,13 +32,11 @@ set ruler
 set hlsearch
 set incsearch
 set ignorecase
-set smartcase
+"set smartcase
 set wrap
-set linebreak
-set nolist
 
-set showcmd
-set showmatch
+" autocomplete scratch
+set completeopt-=preview
 
 noremap <F4> :NERDTreeToggle<CR>
 noremap <F12> :GoDef<CR>
@@ -57,28 +54,30 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_function_calls = 1
 
-set statusline=%F     " File name (tail) of file in the buffer.
-set statusline+=%m    " Modified flag, text is "[+]"; "[-]" if 'modifiable' is off.
-set statusline+=%r    " Readonly flag, text is "[RO]".
-set statusline+=\ [T=%Y  " Type of file in the buffer, e.g., ",VIM".
-set statusline+=\ EOL=%{&ff}     " Type of end-of-line,e.g. "dos" or "unix"
-set statusline+=\ ENC=%{&fenc}]  " Encoding, e.g. "utf-8"
-set statusline+=[chr=\%03.3b/0x\%02.2B]  " Value of byte under cursor (b), and in hex (B)
-set statusline+=\ %=[%c:%l       " Column number and line number
-set statusline+=\ (%p%%\ of\ %L)] " Percentage through file in lines (p) and number of lines in buffer (L)
+let g:syntastic_shell = "/bin/sh"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_jump = 1
+let g:syntastic_go_checkers = ['golint']
+
+set statusline=%F     
+set statusline+=%m   
+set statusline+=%r  
+set statusline+=\ [T=%Y 
+set statusline+=\ EOL=%{&ff}
+set statusline+=\ ENC=%{&fenc}] 
+set statusline+=[chr=\%03.3b/0x\%02.2B] 
+set statusline+=\ %=[%c:%l     
+set statusline+=\ (%p%%\ of\ %L)]
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set laststatus=2
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_go_checkers = ['go-lint']
 
 colorscheme molokai
-syntax on 
-syntax enable
 
+execute pathogen#infect()
