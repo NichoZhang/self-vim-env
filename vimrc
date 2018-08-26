@@ -7,6 +7,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go', { 'do': ':GoUpdateBinaries'}
 Plugin 'fatih/molokai'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-syntastic/syntastic'
 call vundle#end()
 filetype plugin indent on
 

@@ -22,7 +22,7 @@ function corp_proxy_off() {
 }
 
 function self_proxy_on() {
-    export all_proxy="socks5://127.0.0.1:1086";
+    export all_proxy="socks5://127.0.0.1:1080"
 }
 
 function self_proxy_off() {
