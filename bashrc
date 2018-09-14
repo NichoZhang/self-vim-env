@@ -48,12 +48,27 @@ YELLOW="\033[0;33;33m"
 BLUE="\033[0;33;34m"
 PURPLE="\033[0;33;35m"
 RESET="\033[m"
-parse_git_branch() {
-     git_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')
-     git_branch="${GREEN}${git_branch}${RESET}"
-     echo -e ${git_branch}
+function parse_git_branch {
+    log=$(git status -sb 2> /dev/null)
+
+    OLD_IFS="$IFS"
+    IFS=$(echo -e "\n\b")
+    arr=($log)
+    IFS="$OLD_IFS"
+
+    git_branch="${arr[0]:3}"
+
+    if [ ${#git_branch} -gt 0 ]; then
+        if [ ${#arr[@]} -gt 1 ]; then
+            git_branch="${RED}($git_branch)${RESET}"
+        else
+            git_branch="${GREEN}($git_branch)${RESET}"
+        fi
+    fi
+    echo -e ${git_branch}
 }
 
-export PS1="\u@\h \[\033[01;36m\]\W\[\033[01;32m\] $(parse_git_branch)\[\033[00m\] \n\$ "
+
+export PS1="\u@\h \[\033[01;36m\]\W\[\033[01;32m\] \$(parse_git_branch)\[\033[00m\] \n\$ "
 
 export PATH="${PATH}:${GOBIN}"
